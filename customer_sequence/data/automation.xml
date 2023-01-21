@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+<!--		<record id="id_server_action" model="base.automation">-->
+<!--			<field name="name">Odoo Server Action</field>-->
+<!--			<field name="sequence">1</field>-->
+<!--   		    <field name="trigger">on_create</field>-->
+<!--			<field name="type">ir.actions.server</field>-->
+<!--			<field name="model_id" ref="sale.model_sale_order"/>-->
+<!--			<field name="state">code</field>-->
+<!--			<field name="code">action = env["sale.order"].automated_action_method()</field>-->
+<!--        </record>-->
+</odoo>
