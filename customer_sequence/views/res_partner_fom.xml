@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_partner_form_inherit" model="ir.ui.view">
+			<field name="name">res.partner.form.inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@id='individual']" position="after">
+<!--					<dev>-->
+<!--						<field name="location"/>-->
+<!--					</dev>-->
+				</xpath>
+				<field name="vat" position="after">
+					<dev>
+						<field name="location" widget="many2many_tags"/>
+					</dev>
+				</field>
+				<div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_circuits" icon="fa-list-ul">
+                        <field string="Circuits" name="circuit_count" widget="statinfo"/>
+                    </button>
+                </div>
+			</field>
+		</record>
+
+		<record id="view_partner_tree_inherit" model="ir.ui.view">
+			<field name="name">res.partner.form.inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_tree"/>
+			<field name="arch" type="xml">
+				<field name="display_name" position="after">
+					<field name="unique_id"/>
+				</field>
+			</field>
+		</record>
+
+		<record id="view_circuit_id_tree" model="ir.ui.view">
+			<field name="name">res.partner.circuit.id</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="circuit_id"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_order_agent_form_inherit" model="ir.ui.view">
+			<field name="name">sale.agent.order.inherit.form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="after">
+					<field name="location_type"/>
+					<field name="new_circuit" attrs="{'invisible': [('location_type', '=', 'new')]}"/>
+					<field name="location"/>
+<!--					<field name="related_circuit"/>-->
+<!--					<field name="related_location"/>-->
+					<field name="circuit"/>
+					<field name="cir" invisible="1"/>
+<!--					<field name="unique_ids"/>-->
+				</xpath>
+			</field>
+		</record>
+		<record id="view_order_agent_tree_inherit" model="ir.ui.view">
+			<field name="name">sale.agent.order.inherit.tree</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_tree"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="circuit"/>
+<!--					<field name="unique_ids"/>-->
+				</xpath>
+			</field>
+		</record>
+
+<!--######## Tree ########-->
+		<record id="view_circuit_tree" model="ir.ui.view">
+			<field name="name">circuit.tree</field>
+			<field name="model">circuit.circuit</field>
+			<field name="arch" type="xml">
+				<tree editable="bottom">
+					<field name="circuit" />
+					<field name="old_circuit_id" />
+					<field name="partner_id" />
+					<field name="location" />
+					<field name="order" />
+					<field name="product_id" />
+				</tree>
+			</field>
+		</record>
+		<record id="view_circuit_form" model="ir.ui.view">
+			<field name="name">circuit.form</field>
+			<field name="model">circuit.circuit</field>
+			<field name="arch" type="xml">
+				<sheet>
+					<form>
+						<group>
+							<field name="circuit" />
+							<field name="partner_id" />
+							<field name="location" />
+<!--							<field name="order" />-->
+						</group>
+					</form>
+				</sheet>
+			</field>
+		</record>
+
+<!--		***************** Circuit Search ***************      -->
+		<record id="view_circuit_search" model="ir.ui.view">
+			<field name="name">circuit.search</field>
+			<field name="model">circuit.circuit</field>
+			<field name="arch" type="xml">
+				<search string="Circuit Search">
+					<field name="circuit"/>
+					<field name="partner_id"/>
+					<field name="location"/>
+					<field name="order"/>
+					<filter
+							string="Customer"
+							name="partner_id"
+							domain="[]"
+							context="{'group_by':'partner_id'}"
+					/>
+				</search>
+			</field>
+		</record>
+
+<!--		***************** Circuit Action & Menu ***************      -->
+		<record model="ir.actions.act_window" id="circuit_action">
+			<field name="name">Circuits</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">circuit.circuit</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+    	<menuitem
+            name="Circuits"
+            id="circuit_menu"
+            parent="sale.menu_sale_config"
+            action="circuit_action"
+            sequence="3"/>
+
+	</data>
+</odoo>
