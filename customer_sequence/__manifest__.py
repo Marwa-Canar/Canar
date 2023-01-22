@@ -35,6 +35,7 @@
     'data': [
         'views/res_partner_fom.xml',
         'views/res_company.xml',
+        # 'data/automation.xml',
         'security/ir.model.access.csv',
     ],
     'images': ['static/description/banner.png'],
