@@ -16,12 +16,22 @@ class ProductCategory(models.Model):
     prefix_barcode = fields.Char(default="40", size=2)
     barcode_random = fields.Boolean(default=True)
 
+class ProductProduct(models.Model):
+    _inherit = "product.product"
+
+    _sql_constraints = [
+        (
+            "default_code_uniq",
+            "unique(default_code)",
+            "Internal Reference must be unique across the database!",
+        )
+    ]
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     _sql_constraints = [
-        ("default_code_uniq", "unique (default_code,active,company_id)", "Internal Reference already exists !"),
+        ("name_code", "unique (default_code,active,company_id)", "Internal Reference already exists !"),
     ]
 
     @api.model
