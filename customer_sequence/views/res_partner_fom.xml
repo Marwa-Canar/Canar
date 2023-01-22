@@ -89,22 +89,22 @@
 				</tree>
 			</field>
 		</record>
-		<record id="view_circuit_form" model="ir.ui.view">
-			<field name="name">circuit.form</field>
-			<field name="model">circuit.circuit</field>
-			<field name="arch" type="xml">
-				<sheet>
-					<form>
-						<group>
-							<field name="circuit" />
-							<field name="partner_id" />
-							<field name="location" />
-<!--							<field name="order" />-->
-						</group>
-					</form>
-				</sheet>
-			</field>
-		</record>
+<!--		<record id="view_circuit_form" model="ir.ui.view">-->
+<!--			<field name="name">circuit.form</field>-->
+<!--			<field name="model">circuit.circuit</field>-->
+<!--			<field name="arch" type="xml">-->
+<!--				<sheet>-->
+<!--					<form>-->
+<!--						<group>-->
+<!--							<field name="circuit" />-->
+<!--							<field name="partner_id" />-->
+<!--							<field name="location" />-->
+<!--&lt;!&ndash;							<field name="order" />&ndash;&gt;-->
+<!--						</group>-->
+<!--					</form>-->
+<!--				</sheet>-->
+<!--			</field>-->
+<!--		</record>-->
 
 <!--		***************** Circuit Search ***************      -->
 		<record id="view_circuit_search" model="ir.ui.view">
