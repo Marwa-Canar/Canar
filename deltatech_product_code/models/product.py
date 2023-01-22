@@ -21,7 +21,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     _sql_constraints = [
-        ("name_code", "unique (default_code,active,company_id)", "Internal Reference already exists !"),
+        ("default_code_uniq", "unique (default_code,active,company_id)", "Internal Reference already exists !"),
     ]
 
     @api.model
