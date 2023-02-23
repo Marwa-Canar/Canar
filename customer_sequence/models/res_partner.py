@@ -46,6 +46,20 @@ class ResPartner(models.Model):
                 company_seq.write({'next_code': company_seq.customer_code + 1})
         return res
 
+    @api.model
+    def create(self, values):
+        res = super(ResPartner, self).create(values)
+        company_seq = self.env.company
+        if res.customer_rank >  0 and res.unique_id == '/':
+            if company_seq.next_code:
+                res.unique_id = company_seq.next_code
+                res.name = '[' + str(company_seq.next_code) + ']' + str(res.name)
+                company_seq.write({'next_code': company_seq.next_code + 1})
+            else:
+                res.unique_id = company_seq.customer_code
+                res.name = '[' + str(company_seq.customer_code) + ']' + str(res.name)
+                company_seq.write({'next_code': company_seq.customer_code + 1})
+        return res
 
 class PartnerId(models.Model):
     _inherit = 'res.partner'
@@ -90,7 +104,7 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         for record in self :
             if record.location_type == 'new':
-                seq = 'CID/' + record.unique_ids + '/' + record.order_line.product_id.default_code + '/' + record.related_location
+                seq = record.unique_ids + record.order_line.product_id.default_code + str(record.location.id)
                 record.write({'circuit': seq})
                 cir = self.env["circuit.circuit"].create(
                     {
@@ -113,7 +127,7 @@ class SaleOrder(models.Model):
                         if cuit :
                             print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz", record.counter)
                             # seq = 'CID/' + record.unique_ids + '/' + record.order_line.product_id.default_code + '/' + record.related_location + "/" + str(record.partner_id.circuit_count)
-                            seq = 'CID/' + record.unique_ids + '/' + record.order_line.product_id.default_code + '/' + record.related_location + "/" + str(cuit)
+                            seq = record.unique_ids + record.order_line.product_id.default_code + str(record.location.id) + str(cuit)
                             int(record.counter)
                             # record.counter += 1
                             record.write({'circuit': seq})
