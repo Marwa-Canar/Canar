@@ -31,8 +31,8 @@ class ResPartner(models.Model):
 
     unique_id = fields.Char(string='Unique Id', help="The Unique Sequence no",default='/')
     # abbreviation = fields.Char(string='Abbreviation')
-    delegated_person = fields.Char(string='Delegated Person')
-    sub_account = fields.Integer(string='Sub Account')
+    # delegated_person = fields.Char(string='Delegated Person')
+    # sub_account = fields.Integer(string='Sub Account')
 
     # @api.depends
     @api.model
