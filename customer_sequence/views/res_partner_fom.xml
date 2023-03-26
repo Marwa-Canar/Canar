@@ -10,7 +10,7 @@
 					<field name="unique_id"/>
 				</field>
 				<field name="vat" position="after">
-					<field name="Abbreviation"/>
+					<field name="abbreviation"/>
 <!--					<field name="delegated_person"/>-->
 <!--					<field name="sub_account"/>-->
 					<field name="location" widget="many2many_tags"/>
