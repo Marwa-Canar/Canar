@@ -6,16 +6,21 @@
 			<field name="model">res.partner</field>
 			<field name="inherit_id" ref="base.view_partner_form"/>
 			<field name="arch" type="xml">
-				<xpath expr="//field[@id='individual']" position="after">
-<!--					<dev>-->
-<!--						<field name="location"/>-->
-<!--					</dev>-->
-				</xpath>
 				<field name="vat" position="after">
-					<dev>
-						<field name="location" widget="many2many_tags"/>
-					</dev>
+					<field name="unique_id"/>
 				</field>
+				<field name="vat" position="after">
+					<field name="abbreviation"/>
+					<field name="delegated_person"/>
+					<field name="sub_account"/>
+					<field name="location" widget="many2many_tags"/>
+				</field>
+<!--				<field name="email" position="after">-->
+<!--					<field name="delegated_person"/>-->
+<!--				</field>-->
+				<xpath expr="//field[@id='individual']" position="after">
+
+				</xpath>
 				<div name="button_box" position="inside">
                     <button class="oe_stat_button" type="object" name="get_circuits" icon="fa-list-ul">
                         <field string="Circuits" name="circuit_count" widget="statinfo"/>
